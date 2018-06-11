@@ -7,7 +7,7 @@
 	操作步骤：
 	>> make    #进入对应目录下，根据自己的服务器版本而定，有gcc即可
 	>> rmmod toa #卸载以前的toa版本
-	>> insmod toa   #挂载编译好的toa
+	>> insmod toa.ko   #挂载编译好的toa
 	>> lsmod | grep toa #查看是否成功
 
 

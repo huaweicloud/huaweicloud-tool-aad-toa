@@ -72,7 +72,7 @@ static void * get_toa_data(struct sk_buff *skb)
 	unsigned char *ptr;
 
 	struct toa_data tdata;
-
+        int toa_lay=-1;
 	void *ret_ptr = NULL;
 
 	//TOA_DBG("get_toa_data called\n");
@@ -87,7 +87,7 @@ static void * get_toa_data(struct sk_buff *skb)
 			int opsize;
 			switch (opcode) {
 			case TCPOPT_EOL:
-				return NULL;
+				break;
 			case TCPOPT_NOP:	/* Ref: RFC 793 section 3.1 */
 				length--;
 				continue;
@@ -98,17 +98,22 @@ static void * get_toa_data(struct sk_buff *skb)
 				if (opsize > length)
 					return NULL;	/* don't parse partial options */
 				if (TCPOPT_TOA == opcode && TCPOLEN_TOA == opsize) {
-					memcpy(&tdata, ptr - 2, sizeof (tdata));
+				       toa_lay++;
+                                      if(toa_lay >= 3) return NULL;	
+                                       memcpy(&tdata, ptr - 2, sizeof (tdata));
 					//TOA_DBG("find toa data: ip = %u.%u.%u.%u, port = %u\n", NIPQUAD(tdata.ip),
 						//ntohs(tdata.port));
-					memcpy(&ret_ptr, &tdata, sizeof (ret_ptr));
-					//TOA_DBG("coded toa data: %p\n", ret_ptr);
-					return ret_ptr;
 				}
 				ptr += opsize - 2;
 				length -= opsize;
 			}
 		}
+         if(toa_lay != -1)
+          {
+            memcpy(&ret_ptr, &tdata, sizeof (ret_ptr));
+					//TOA_DBG("coded toa data: %p\n", ret_ptr);
+	     return ret_ptr;
+            }
 	}
 	return NULL;
 }
