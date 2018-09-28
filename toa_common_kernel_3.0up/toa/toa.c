@@ -60,7 +60,7 @@ static void *get_toa_data(struct sk_buff *skb)
 			int opsize;
 			switch (opcode) {
 			case TCPOPT_EOL:
-				return NULL;
+				break;
 			case TCPOPT_NOP:	/* Ref: RFC 793 section 3.1 */
 				length--;
 				continue;
