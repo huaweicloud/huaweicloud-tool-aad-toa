@@ -1,7 +1,7 @@
 huaweicloud-tool-aad-toa
 ------------------------
 
-华为高防（https://www.huaweicloud.com/product/aad.html） 专用toa模块,在开源toa的基础上做了优化，用于在服务端解析真实源ip，可直接在Linux服务器上编译安装。
+华为高防（https://www.huaweicloud.com/product/aad.html） 专用toa模块，在开源toa的基础上做了优化，用于在服务端解析真实源ip，可直接在Linux服务器上编译安装。
 
 
 
@@ -22,7 +22,7 @@ toa_common————通用版本toa，一般针对Linux内核3.0及其以上�
  
 下载代码并进入对应版本目录下，执行：
 ```shell
-make
+1、 make
 ```   
 
 
@@ -59,7 +59,7 @@ make
  				grub2-set-default "CentOS Linux (3.10.0-862.11.6.el7.x86_64)"
 ```
 
-不报错即为成功
+>>>不报错即为成功
 
 >>重启生效，执行：
 ```
@@ -74,20 +74,20 @@ uname -r
 >>注意：内核的替换是有风险的，可能造成某些依赖底层的功能失效，甚至造成不可估量的结果。建议是在不需要太过依赖指定内核版本的情况下替换，替换之后，为保证原有进程的可靠性，建议充分测试。
 
 ```
-rmmod toa #卸载以前的toa版本
-insmod toa.ko   #挂载编译好的toa
-lsmod | grep toa #查看是否成功，有显示即为成功
+2、rmmod toa #卸载以前的toa版本
+3、insmod toa.ko   #挂载编译好的toa
+4、lsmod | grep toa #查看是否成功，有显示即为成功
 ```
 ## 常见问题 ##
 以下解决重启自动加载toa的问题：
 
 >make成功之后在本目录下会生成toa.ko，可将此toa.ko复制到：
-/lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/ 目录下:
+>/lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/ 目录下:
 ```
 	cp toa.ko /lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/  #不一定存放在此目录，只是为了重启之后被加载
 ```
-	此处提供centos重启挂载toa的方式：
-		在/etc/sysconfig/modules/目录下加入脚本文件，方便重启加载toa
+	>>此处提供centos重启挂载toa的方式：
+		>>在/etc/sysconfig/modules/目录下加入脚本文件，方便重启加载toa
 		```
 		cd /etc/sysconfig/modules/
 		echo "insmod /lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/toa.ko" > toa.modules  # 创建toa.modules文件用于重启默认加载
