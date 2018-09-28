@@ -2,13 +2,9 @@ huaweicloud-tool-aad-toa
 
 华为高防（https://www.huaweicloud.com/product/aad.html） 专用toa模块：
 
-在开源toa的基础上做了优化，可直接在Linux服务器（centos系列，其他系统需要定制）上编译安装。
+在开源toa的基础上做了优化，可直接在Linux服务器上编译安装。
 
 
-
-编译安装toa模块详细说明如下：
-
-当前华为高防提供toa的源码地址（https://github.com/huaweicloud/huaweicloud-tool-aad-toa），需要下载源码在目标主机上编译安装。
 
 当前git仓库有3套toa代码：
 
@@ -20,7 +16,7 @@ toa_common     通用版本toa，一般针对Linux内核3.0及其以上的系统
 编译：
 
 >> make    
-        #进入对应目录下，根据自己的服务器版本而定，有gcc即可
+        进入对应目录下，根据自己的服务器版本而定，有gcc即可
 	如果报错显示找不到指定/lib/modules/xxxx/build/目录，表示系统缺少相关的头文件，无法编译，此时需要在系统上安装缺少的头文件
 	执行：
 		>> yum install kernel-devel
@@ -38,8 +34,9 @@ toa_common     通用版本toa，一般针对Linux内核3.0及其以上的系统
 			查询新的内核版本的具体名称，执行：
 			        >> cat  /boot/grub2/grub.cfg  | grep menuentry
 			        执行结果：
-                                
-			        'CentOS Linux (3.10.0-862.11.6.el7.x86_64) 7 (Core)'此版本即为我新install的版本。
+                                'menuentry 'CentOS Linux (3.10.0-862.11.6.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-693.2.2.el7.x86_64-advanced-eb448abb-3012-4d8d-bcde-94434d586a31' {menuentry 'CentOS Linux (3.10.0-693.2.2.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-693.2.2.el7.x86_64-advanced-eb448abb-3012-4d8d-bcde-94434d586a31' {menuentry 'CentOS Linux (3.10.0-693.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-693.el7.x86_64-advanced-eb448abb-3012-4d8d-bcde-94434d586a31' {......'
+			        
+				'CentOS Linux (3.10.0-862.11.6.el7.x86_64) 7 (Core)'此版本即为我新install的版本。
 			        设置切换默认内核，执行：
 			                >> grub2-set-default "CentOS Linux (3.10.0-862.11.6.el7.x86_64)"
 			                不报错即为成功
