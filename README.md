@@ -94,5 +94,7 @@ uname -r
 		chmod 755 toa.modules  #增加权限，重启即可生效
 ```
 
+>>此处还提供ubuntu14重启挂载toa的方式：
+>>修改/etc/rc.local 配置文件，在文件初始行加入："insmod /lib/modules/`uname -r`/kernel/net/netfilter/ipvs/toa.ko"，即可。
 ## 其他 ##
 有任何建议请与我们留言
