@@ -84,13 +84,13 @@ uname -r
 >make成功之后在本目录下会生成toa.ko，可将此toa.ko复制到：
 >/lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/ 目录下:
 ```
-	cp toa.ko /lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/  #不一定存放在此目录，只是为了重启之后被加载
+	cp toa.ko /lib/modules/`uname -r`/kernel/net/netfilter/ipvs/  #不一定存放在此目录，只是为了重启之后被加载
 ```
 >>此处提供centos重启挂载toa的方式：
 >>在/etc/sysconfig/modules/目录下加入脚本文件，方便重启加载toa
 ```
 		cd /etc/sysconfig/modules/
-		echo "insmod /lib/modules/3.10.0-862.11.6.el7.x86_64/kernel/net/netfilter/ipvs/toa.ko" > toa.modules  # 创建toa.modules文件用于重启默认加载
+		echo "insmod /lib/modules/`uname -r`/kernel/net/netfilter/ipvs/toa.ko" > toa.modules  # 创建toa.modules文件用于重启默认加载
 		chmod 755 toa.modules  #增加权限，重启即可生效
 ```
 
