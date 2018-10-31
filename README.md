@@ -7,7 +7,7 @@ huaweicloud-tool-aad-toa
 
 ## 版本选择 ##
  
-当前git仓库有3套toa代码：
+当前git仓库有4套toa代码：
 
 centos6.5————对应Linux内核2.6.x
 
